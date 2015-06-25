@@ -214,7 +214,8 @@
                 <configuration>
                     <executable>java</executable>
                     <classpathScope>test</classpathScope>
-                    <mainClass>org.switchyard.quickstarts.demo.policy.security.cert.WorkServiceMain</mainClass>
+                    <!--<mainClass>org.switchyard.quickstarts.demo.policy.security.cert.WorkServiceMain</mainClass>-->
+                    <mainClass>org.switchyard.quickstarts.demo.policy.security.cert.WorkServiceMain2</mainClass>
                 </configuration>
             </plugin>
             <!-- Attach sources -->

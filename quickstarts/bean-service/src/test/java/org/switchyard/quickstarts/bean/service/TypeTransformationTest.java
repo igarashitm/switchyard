@@ -31,11 +31,12 @@ import org.switchyard.test.ServiceOperation;
 import org.switchyard.test.SwitchYardRunner;
 import org.switchyard.test.SwitchYardTestCaseConfig;
 import org.switchyard.component.test.mixins.cdi.CDIMixIn;
+import org.switchyard.component.test.mixins.transaction.TransactionMixIn;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 @RunWith(SwitchYardRunner.class)
-@SwitchYardTestCaseConfig(mixins = CDIMixIn.class)
+@SwitchYardTestCaseConfig(mixins = {CDIMixIn.class, TransactionMixIn.class})
 public class TypeTransformationTest {
 
     @ServiceOperation("OrderService.submitOrder")

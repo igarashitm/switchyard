@@ -24,9 +24,10 @@ import org.switchyard.test.ServiceOperation;
 import org.switchyard.test.SwitchYardRunner;
 import org.switchyard.test.SwitchYardTestCaseConfig;
 import org.switchyard.component.test.mixins.cdi.CDIMixIn;
+import org.switchyard.component.test.mixins.transaction.TransactionMixIn;
 
 @RunWith(SwitchYardRunner.class)
-@SwitchYardTestCaseConfig(mixins = CDIMixIn.class)
+@SwitchYardTestCaseConfig(mixins = {TransactionMixIn.class,CDIMixIn.class})
 public class OrderServiceTest {
 
     @ServiceOperation("OrderService.submitOrder")

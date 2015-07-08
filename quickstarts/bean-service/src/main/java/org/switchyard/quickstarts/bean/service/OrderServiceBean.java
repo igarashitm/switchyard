@@ -17,6 +17,7 @@
 package org.switchyard.quickstarts.bean.service;
 
 import javax.inject.Inject;
+import javax.transaction.UserTransaction;
 
 import org.switchyard.component.bean.Reference;
 import org.switchyard.component.bean.Service;
@@ -28,8 +29,17 @@ public class OrderServiceBean implements OrderService {
     @Reference
     private InventoryService _inventory;
 
+    @Inject
+    private UserTransaction _ut;
+
     @Override
     public OrderAck submitOrder(Order order) {
+        try {
+            _ut.begin();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
         // Create an order ack
         OrderAck orderAck = new OrderAck().setOrderId(order.getOrderId());
         // Check the inventory
@@ -43,6 +53,12 @@ public class OrderServiceBean implements OrderService {
             }
         } catch (ItemNotFoundException infEx) {
             orderAck.setAccepted(false).setStatus("Item Not Available");
+        } finally {
+            try {
+                _ut.commit();
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
         }
         return orderAck;
     }

@@ -22,12 +22,13 @@ import org.switchyard.test.BeforeDeploy;
 import org.switchyard.test.SwitchYardRunner;
 import org.switchyard.test.SwitchYardTestCaseConfig;
 import org.switchyard.component.test.mixins.cdi.CDIMixIn;
+import org.switchyard.component.test.mixins.transaction.TransactionMixIn;
 import org.switchyard.component.test.mixins.http.HTTPMixIn;
 import org.switchyard.transform.config.model.TransformSwitchYardScanner;
 
 @RunWith(SwitchYardRunner.class)
 @SwitchYardTestCaseConfig(
-    mixins = { CDIMixIn.class, HTTPMixIn.class },
+    mixins = { CDIMixIn.class, TransactionMixIn.class, HTTPMixIn.class },
     config = SwitchYardTestCaseConfig.SWITCHYARD_XML,
     scanners = TransformSwitchYardScanner.class)
 public class WebServiceTest {

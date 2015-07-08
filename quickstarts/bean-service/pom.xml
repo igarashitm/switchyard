@@ -102,6 +102,11 @@
             <scope>test</scope>
         </dependency>
         <dependency>
+            <groupId>org.switchyard.components</groupId>
+            <artifactId>switchyard-component-test-mixin-jca</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <scope>test</scope>

@@ -45,8 +45,10 @@ public final class RemoteClient {
      */
     public static void main(final String[] ignored) throws Exception {
         // Create a new remote client invoker
-        String port = System.getProperty("org.switchyard.component.sca.client.port", "8080");
-        RemoteInvoker invoker = new HttpInvoker("http://localhost:" + port + "/switchyard-remote");
+        String port = System.getProperty("org.switchyard.component.sca.client.port", "8443");
+        RemoteInvoker invoker = new HttpInvoker("https://localhost:" + port + "/switchyard-remote")
+            .setProperty(HttpInvoker.AUTH_USERNAME, "kermit")
+            .setProperty(HttpInvoker.AUTH_PASSWORD, "the-frog-1");
 
         // Create request payload
         Offer offer = createOffer(true);

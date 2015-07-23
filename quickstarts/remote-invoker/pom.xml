@@ -186,6 +186,11 @@
                             <goal>deploy-only</goal>
                         </goals>
                         <configuration>
+                            <beforeDeployment>
+                                <scripts>
+                                    <script>config.cli</script>
+                                </scripts>
+                            </beforeDeployment>
                             <filename>${project.build.finalName}.jar</filename>
                             <skip>${deploy.skip}</skip>
                         </configuration>
@@ -197,6 +202,11 @@
                             <goal>undeploy</goal>
                         </goals>
                         <configuration>
+                            <afterDeployment>
+                                <scripts>
+                                    <script>unconfig.cli</script>
+                                </scripts>
+                            </afterDeployment>
                             <filename>${project.build.finalName}.jar</filename>
                             <skip>${deploy.skip}</skip>
                         </configuration>

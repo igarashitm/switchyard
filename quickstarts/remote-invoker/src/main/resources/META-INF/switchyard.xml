@@ -23,7 +23,7 @@
     </sca:service>
     <sca:component name="DealerBean">
       <bean:implementation.bean class="org.switchyard.quickstarts.remoteinvoker.DealerBean"/>
-      <sca:service name="Dealer">
+      <sca:service name="Dealer" requires="confidentiality clientAuthentication">
         <sca:interface.java interface="org.switchyard.quickstarts.remoteinvoker.Dealer"/>
       </sca:service>
       <sca:reference name="CreditCheck">

@@ -4,5 +4,5 @@ if (outcome != success) of /subsystem=web/connector=https/:read-resource
 end-if
 if (outcome != success) of /subsystem=security/security-domain=policy-security-cert:read-resource
     /subsystem=security/security-domain=policy-security-cert:add(cache-type=default)
-    /subsystem=security/security-domain=policy-security-cert/authentication=classic:add(login-modules=[{"code"=>"org.switchyard.security.login.CertificateLoginModule", "flag"=>"required", "module-options"=>[("keyStoreLocation"=>"${jboss.home.dir}/quickstarts/demos/policy-security-cert/users.jks"),("keyStorePassword"=>"changeit"),("rolesProperties"=>"${jboss.home.dir}/quickstarts/demos/policy-security-cert/roles.properties")] }]   )
+    /subsystem=security/security-domain=policy-security-cert/authentication=classic:add(login-modules=[{"code"=>"org.switchyard.security.login.CertificateLoginModule", "flag"=>"required", "module-options"=>[("keyStoreLocation"=>"${jboss.home.dir}/quickstarts/demos/policy-security-cert/users.jks"),("keyStorePassword"=>"changeit"),("rolesProperties"=>"${jboss.home.dir}/quickstarts/demos/policy-security-cert/roles.properties"),("useDistinguishedName"=>"true")] }]   )
 end-if

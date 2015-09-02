@@ -31,8 +31,8 @@
         <url>http://github.com/jboss-switchyard/console</url>
     </scm>
     <properties>
-        <version.com.google.gwt>2.5.1</version.com.google.gwt>
-        <version.jbossas.console>2.2.8.Final</version.jbossas.console>
+        <version.com.google.gwt>2.7.0</version.com.google.gwt>
+        <version.jbossas.console>2.8.5</version.jbossas.console>
     </properties>
     <modules>
         <module>component</module>

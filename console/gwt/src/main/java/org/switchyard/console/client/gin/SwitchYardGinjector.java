@@ -36,7 +36,7 @@ import com.google.gwt.inject.client.Ginjector;
  * @author Rob Cernich
  */
 @GinModules(SwitchYardClientModule.class)
-@GinExtension("org.switchyard.console.SwitchYard")
+@GinExtension
 public interface SwitchYardGinjector extends Ginjector {
 
     /**

@@ -15,7 +15,7 @@
 package org.switchyard.console.client.ui.runtime;
 
 import org.jboss.as.console.client.plugins.RuntimeGroup;
-import org.jboss.as.console.client.shared.state.ServerSelectionChanged;
+import org.jboss.as.console.client.shared.state.ReloadEvent;
 import org.jboss.as.console.client.shared.subsys.RevealStrategy;
 import org.jboss.as.console.spi.AccessControl;
 import org.jboss.as.console.spi.RuntimeExtension;
@@ -44,7 +44,7 @@ import com.gwtplatform.mvp.client.proxy.RevealContentHandler;
  * @author Rob Cernich
  */
 public class RuntimePresenter extends TabContainerPresenter<RuntimePresenter.MyView, RuntimePresenter.MyProxy>
-        implements ServerSelectionChanged.ChangeListener {
+        implements ReloadEvent.ReloadListener {
 
     /**
      * MyProxy
@@ -109,7 +109,7 @@ public class RuntimePresenter extends TabContainerPresenter<RuntimePresenter.MyV
     }
 
     @Override
-    public void onServerSelectionChanged(boolean isRunning) {
+    public void onReload() {
         // getView().refreshTabs();
     }
 

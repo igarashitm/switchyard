@@ -55,10 +55,14 @@
         </dependency>
         <dependency>
             <groupId>com.gwtplatform</groupId>
+            <artifactId>gwtp-mvp-shared</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.gwtplatform</groupId>
             <artifactId>gwtp-mvp-client</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.google.code.gwt-log</groupId>
+            <groupId>com.allen-sauer.gwt.log</groupId>
             <artifactId>gwt-log</artifactId>
         </dependency>
         <dependency>

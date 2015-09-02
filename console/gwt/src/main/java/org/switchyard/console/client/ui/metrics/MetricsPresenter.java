@@ -18,7 +18,7 @@ import java.util.List;
 
 import org.jboss.as.console.client.Console;
 import org.jboss.as.console.client.plugins.RuntimeGroup;
-import org.jboss.as.console.client.shared.state.ServerSelectionChanged;
+import org.jboss.as.console.client.shared.state.ReloadEvent;
 import org.jboss.as.console.client.shared.subsys.RevealStrategy;
 import org.jboss.as.console.spi.AccessControl;
 import org.jboss.as.console.spi.RuntimeExtension;
@@ -50,7 +50,7 @@ import com.gwtplatform.mvp.client.proxy.ResetPresentersEvent;
  * @author Rob Cernich
  */
 public class MetricsPresenter extends Presenter<MetricsPresenter.MyView, MetricsPresenter.MyProxy> implements
-        ServerSelectionChanged.ChangeListener {
+        ReloadEvent.ReloadListener {
 
     /**
      * MyProxy
@@ -159,7 +159,7 @@ public class MetricsPresenter extends Presenter<MetricsPresenter.MyView, Metrics
     }
 
     @Override
-    public void onServerSelectionChanged(boolean isRunning) {
+    public void onReload() {
         getView().clearMetrics();
 
         Scheduler.get().scheduleDeferred(new Scheduler.ScheduledCommand() {
@@ -176,7 +176,7 @@ public class MetricsPresenter extends Presenter<MetricsPresenter.MyView, Metrics
     protected void onBind() {
         super.onBind();
         getView().setPresenter(this);
-        getEventBus().addHandler(ServerSelectionChanged.TYPE, this);
+        getEventBus().addHandler(ReloadEvent.TYPE, this);
     }
 
     @Override

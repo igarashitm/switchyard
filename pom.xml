@@ -52,7 +52,7 @@
         <!-- [WARNING] Using platform encoding (UTF-8 actually) to copy filtered
           resources, i.e. build is platform dependent! -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <version.org.jboss.as.console>1.5.4.Final</version.org.jboss.as.console>
+        <version.org.jboss.as.console>2.8.5</version.org.jboss.as.console>
         <version.redhat.eap6.bom>6.3.0.GA</version.redhat.eap6.bom>
         <version.ip.bom>6.0.0-SNAPSHOT</version.ip.bom>
         <!-- This version is only used as a prefix for a jar included in release modules -->
@@ -64,6 +64,7 @@
         <version.camelsap>6.2.0.redhat-064</version.camelsap>
         <version.org.fusesource.mqtt-client>1.6</version.org.fusesource.mqtt-client>
 	<version.org.jboss.as>7.5.0.Final-redhat-21</version.org.jboss.as>
+        <version.com.gwtplatform>1.4</version.com.gwtplatform>
         <!--  RiftSaw -->
         <version.activity.monitor.model>1.2.2.Final</version.activity.monitor.model>
         <version.overlord-commons>2.0.2.Final</version.overlord-commons>
@@ -736,6 +737,11 @@
                 <groupId>net.sourceforge.saxon</groupId>
                 <artifactId>saxonhe</artifactId>
                 <version>${version.net.sourceforge.saxon}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.gwtplatform</groupId>
+                <artifactId>gwtp-mvp-shared</artifactId>
+                <version>${version.com.gwtplatform}</version>
             </dependency>
             <!--  ###################################################################
       ##                    Riftsaw Dependencies                       ##

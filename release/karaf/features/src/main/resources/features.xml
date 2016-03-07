@@ -90,6 +90,13 @@
     <feature name="switchyard-amqp" version="${project.version}" resolver="(obr)">
         <feature version="${project.version}">switchyard-jms</feature>
         <feature version="${version.org.apache.camel.features}">camel-amqp</feature>
+
+        <!-- This qpid client should be in the camel-amqp feature, we should remove it when that's
+            sorted out -->
+        <bundle>wrap:mvn:org.apache.qpid/qpid-client/${version.qpid}</bundle>
+        <bundle>wrap:mvn:org.apache.qpid/qpid-common/${version.qpid}</bundle>
+        <bundle>wrap:mvn:org.apache.qpid/qpid-amqp-1-0-client-jms/${version.qpid}</bundle>
+
         <bundle>mvn:org.switchyard.components/switchyard-component-camel-amqp/${project.version}</bundle>
     </feature>
 

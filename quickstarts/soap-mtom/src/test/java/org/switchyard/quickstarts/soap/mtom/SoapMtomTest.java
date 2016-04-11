@@ -43,7 +43,6 @@ public class SoapMtomTest {
         System.setProperty("org.switchyard.component.soap.client.port", "8081");
     }
 
-    @Ignore("SWITCHYARD-2821")
     @Test
     public void testSwitchYardWebService() throws Exception {
         Image image = SoapMtomClient.sendMessage(WSDL);

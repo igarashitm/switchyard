@@ -14,7 +14,15 @@
 package org.switchyard.karaf.test.quickstarts;
 
 import java.io.InputStreamReader;
+import java.io.Reader;
 import java.io.StringReader;
+import java.net.URL;
+
+import javax.xml.XMLConstants;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.validation.Schema;
+import javax.xml.validation.SchemaFactory;
 
 import org.custommonkey.xmlunit.XMLAssert;
 import org.custommonkey.xmlunit.XMLUnit;
@@ -22,6 +30,8 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.switchyard.common.type.Classes;
 import org.switchyard.component.test.mixins.http.HTTPMixIn;
+import org.w3c.dom.Document;
+import org.xml.sax.InputSource;
 
 public class BeanServiceQuickstartTest extends AbstractQuickstartTest {
     private static String bundleName = "org.switchyard.quickstarts.switchyard.bean.service";
@@ -41,7 +51,7 @@ public class BeanServiceQuickstartTest extends AbstractQuickstartTest {
             XMLUnit.setIgnoreWhitespace(true);
             String port = getSoapClientPort();
             String wsdl = httpMixIn.sendString("http://localhost:" + port + "/quickstart-bean/OrderService?wsdl", "", HTTPMixIn.HTTP_GET);
-            XMLAssert.assertXMLEqual(new InputStreamReader(Classes.getResourceAsStream("quickstarts/bean-service/OrderService.wsdl")), new StringReader(wsdl));
+            compareWSDL(new InputStreamReader(Classes.getResourceAsStream("quickstarts/bean-service/OrderService.wsdl")), new StringReader(wsdl));
             String response = httpMixIn.postString("http://localhost:" + port + "/quickstart-bean/OrderService", SOAP_REQUEST);
             XMLAssert.assertXpathEvaluatesTo("PO-19838-XYZ", "//orderAck/orderId", response);
             XMLAssert.assertXpathEvaluatesTo("true", "//orderAck/accepted", response);
@@ -49,6 +59,43 @@ public class BeanServiceQuickstartTest extends AbstractQuickstartTest {
         } finally {
             httpMixIn.uninitialize();
         }
+    }
+
+    /**
+     * Due to the different behavior on Element ordering between JDK8 and older,
+     * assertXMLEqual() doesn't work OOTB. Instead just verify some parts of WSDL using XPath.
+     */
+    private void compareWSDL(Reader expected, Reader actual) throws Exception {
+        Schema wsdlSchema = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI)
+                                         .newSchema(new URL("http://schemas.xmlsoap.org/wsdl/"));
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        factory.setSchema(wsdlSchema);
+        factory.setIgnoringComments(true);
+        factory.setIgnoringElementContentWhitespace(true);
+        factory.setNamespaceAware(true);
+        factory.setValidating(true);
+        DocumentBuilder builder = factory.newDocumentBuilder();
+        Document expectedDoc = builder.parse(new InputSource(expected));
+        Document actualDoc = builder.parse(new InputSource(actual));
+
+        XMLAssert.assertXpathsEqual(
+                "//definitions/types", expectedDoc,
+                "//definitions/types", actualDoc);
+        XMLAssert.assertXpathsEqual(
+                "//definitions/message[@name=submitOrder]", expectedDoc,
+                "//definitions/message[@name=submitOrder]", actualDoc);
+        XMLAssert.assertXpathsEqual(
+                "//definitions/message[@name=submitOrderResponse]", expectedDoc,
+                "//definitions/message[@name=submitOrderResponse]", actualDoc);
+        XMLAssert.assertXpathsEqual(
+                "//definitions/portType", expectedDoc,
+                "//definitions/portType", actualDoc);
+        XMLAssert.assertXpathsEqual(
+                "//definitions/binding", expectedDoc,
+                "//definitions/binding", actualDoc);
+        XMLAssert.assertXpathsEqual(
+                "//definitions/service", expectedDoc,
+                "//definitions/service", actualDoc);
     }
 
     private static final String SOAP_REQUEST = "<soap:Envelope xmlns:soap=\"http://www.w3.org/2003/05/soap-envelope\">\n" +

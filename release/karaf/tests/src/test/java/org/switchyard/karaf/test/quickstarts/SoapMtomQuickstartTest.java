@@ -34,9 +34,8 @@ import org.switchyard.common.type.Classes;
 import org.switchyard.common.xml.XMLHelper;
 import org.switchyard.component.test.mixins.http.HTTPMixIn;
 
-@Ignore
 public class SoapMtomQuickstartTest extends AbstractQuickstartTest {
-    private static String bundleName = "org.switchyard.quickstarts.switchyard.mtom";
+    private static String bundleName = "org.switchyard.quickstarts.switchyard.soap.mtom";
     private static String featureName = "switchyard-quickstart-soap-mtom";
     private static String SWITCHYARD_WEB_SERVICE = "http://localhost:8181/cxf/soap-mtom/ImageServiceService";
 
@@ -49,7 +48,6 @@ public class SoapMtomQuickstartTest extends AbstractQuickstartTest {
         startTestContainer(featureName, bundleName);
     }
 
-    //@Ignore
     @Test
     public void imageService() throws Exception {
         SOAPMessage response = sendMessage();

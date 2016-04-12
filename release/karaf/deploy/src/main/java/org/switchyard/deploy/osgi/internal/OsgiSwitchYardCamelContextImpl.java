@@ -55,7 +55,7 @@ public class OsgiSwitchYardCamelContextImpl extends SwitchYardCamelContextImpl {
             ctx = _bundleContext;
         }
         FactoryFinder finder = new OsgiFactoryFinderResolver(_bundleContext).resolveDefaultFactoryFinder(getClassResolver());
-        return new OsgiTypeConverter(ctx, getInjector(), finder);
+        return new OsgiTypeConverter(ctx, this, getInjector(), finder);
     }
 
 }

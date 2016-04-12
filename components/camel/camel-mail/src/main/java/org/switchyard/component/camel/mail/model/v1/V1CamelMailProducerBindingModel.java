@@ -13,6 +13,7 @@
  */
 package org.switchyard.component.camel.mail.model.v1;
 
+import org.switchyard.component.camel.common.CamelVersion;
 import org.switchyard.component.camel.common.model.v1.V1BaseCamelModel;
 import org.switchyard.component.camel.mail.model.CamelMailProducerBindingModel;
 import org.switchyard.config.Configuration;
@@ -32,8 +33,8 @@ public class V1CamelMailProducerBindingModel extends V1BaseCamelModel
     private static final String SUBJECT = "subject";
     private static final String FROM = "from";
     private static final String TO = "to";
-    private static final String CC = "CC";
-    private static final String BCC = "BCC";
+    private static String CC = "CC";
+    private static String BCC = "BCC";
     private static final String REPLY_TO = "replyTo";
 
     /**
@@ -42,6 +43,7 @@ public class V1CamelMailProducerBindingModel extends V1BaseCamelModel
      */
     public V1CamelMailProducerBindingModel(String namespace) {
         super(namespace, V1CamelMailBindingModel.PRODUCE);
+
         setModelChildrenOrder(SUBJECT, FROM, TO, CC, BCC, REPLY_TO);
     }
 
@@ -53,6 +55,14 @@ public class V1CamelMailProducerBindingModel extends V1BaseCamelModel
      */
     public V1CamelMailProducerBindingModel(Configuration config, Descriptor desc) {
         super(config, desc);
+        
+        String camelVersion = CamelVersion.getCamelVersion();
+        CamelVersion cv = new CamelVersion();
+        camelVersion = (camelVersion == null) ? "2.17" : camelVersion;
+        if (cv.compare("2.17", camelVersion) >= 0) {
+        	CC = "cc";
+        	BCC = "bcc";
+        }
     }
 
     @Override

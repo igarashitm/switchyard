@@ -29,6 +29,9 @@
     <sca:reference name="WarehouseServiceExternal" multiplicity="0..1" promote="Route/WarehouseServiceExternal">
       <sca:interface.wsdl interface="WarehouseService.wsdl#wsdl.porttype(WarehouseService)"/>
       <cxf:binding.cxf>
+        <cxf:additionalUriParameters>
+            <cxf:parameter name="cxfEndpointConfigurer" value="#myExampleCxfEndpointConfigurer"/>
+        </cxf:additionalUriParameters>
         <cxf:cxfURI>http://localhost:${cxfPort2}/camel-cxf/warehouse/WarehouseService</cxf:cxfURI>
         <cxf:wsdlURL>WarehouseService.wsdl</cxf:wsdlURL>
         <cxf:dataFormat>PAYLOAD</cxf:dataFormat>

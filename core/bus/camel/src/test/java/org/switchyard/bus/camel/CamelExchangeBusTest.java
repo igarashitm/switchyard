@@ -22,10 +22,10 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 import javax.xml.namespace.QName;
 
-import junit.framework.Assert;
 import org.apache.camel.Processor;
 import org.apache.camel.builder.LoggingErrorHandlerBuilder;
 import org.apache.camel.spi.RouteContext;
+import org.junit.Assert;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;

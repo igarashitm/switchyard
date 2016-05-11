@@ -9,27 +9,27 @@ import javax.enterprise.inject.spi.BeanManager;
  */
 final class CdiInjector implements Injector {
 
-    private final Injector injector;
+    private final Injector _injector;
 
-    private final BeanManager manager;
+    private final BeanManager _manager;
 
     CdiInjector(Injector injector, BeanManager manager) {
-        this.injector = injector;
-        this.manager = manager;
+        this._injector = injector;
+        this._manager = manager;
     }
 
     @Override
     public <T> T newInstance(Class<T> type) {
-        T instance = CdiManagerHelper.getReferenceByType(manager, type);
+        T instance = CdiManagerHelper.getReferenceByType(_manager, type);
         if (instance != null) {
             return instance;
         } else {
-            return injector.newInstance(type);
+            return _injector.newInstance(type);
         }
     }
 
     @Override
     public <T> T newInstance(Class<T> type, Object instance) {
-        return injector.newInstance(type, instance);
+        return _injector.newInstance(type, instance);
     }
 }

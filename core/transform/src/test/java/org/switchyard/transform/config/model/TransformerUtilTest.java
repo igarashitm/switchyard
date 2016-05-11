@@ -18,8 +18,7 @@ import java.util.List;
 
 import javax.xml.namespace.QName;
 
-import junit.framework.Assert;
-
+import org.junit.Assert;
 import org.junit.Test;
 import org.switchyard.annotations.Transformer;
 import org.switchyard.extensions.java.JavaService;

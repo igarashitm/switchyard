@@ -53,7 +53,7 @@
             <artifactId>camel-spring</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.beanshell</groupId>
+            <groupId>org.apache-extras.beanshell</groupId>
             <artifactId>bsh</artifactId>
             <scope>test</scope>
         </dependency>

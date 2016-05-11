@@ -13,7 +13,7 @@
  */
 package org.switchyard.deploy.karaf;
 
-import org.apache.felix.gogo.commands.Command;
+import org.apache.karaf.shell.api.action.Command;
 import org.switchyard.admin.Application;
 import org.switchyard.admin.SwitchYard;
 
@@ -21,6 +21,7 @@ import org.switchyard.admin.SwitchYard;
  * Shell command for list-applications.
  */
 @Command(scope = "switchyard", name = "list-applications", description = "Returns a list of all SwitchYard applications deployed on the system.")
+@org.apache.karaf.shell.api.action.lifecycle.Service
 public class ListApplicationsCommand extends AbstractSwitchYardServiceCommand {
 
     @Override

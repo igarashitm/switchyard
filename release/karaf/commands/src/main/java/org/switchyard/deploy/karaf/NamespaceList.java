@@ -22,8 +22,10 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
-import org.apache.felix.gogo.commands.Command;
-import org.apache.karaf.shell.console.OsgiCommandSupport;
+import org.apache.karaf.shell.api.action.Command;
+import org.apache.karaf.shell.api.action.lifecycle.Reference;
+import org.apache.karaf.shell.api.action.Action;
+import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceReference;
 import org.switchyard.deploy.osgi.NamespaceHandler;
 
@@ -31,12 +33,16 @@ import org.switchyard.deploy.osgi.NamespaceHandler;
  * Shell commands for namespaces.
  */
 @Command(scope = "switchyard", name = "namespace-list", description = "List switchyard namespaces.")
-public class NamespaceList extends OsgiCommandSupport {
+@org.apache.karaf.shell.api.action.lifecycle.Service
+public class NamespaceList implements Action {
 
+    @Reference
+    private BundleContext _bundleContext;
+    
     @Override
-    protected Object doExecute() throws Exception {
+    public Object execute() throws Exception {
         Collection<ServiceReference<NamespaceHandler>> refs =
-                getBundleContext().getServiceReferences(
+                _bundleContext.getServiceReferences(
                         NamespaceHandler.class, "(" + NamespaceHandler.NAMESPACES + "=*)");
         if (refs != null) {
             Set<URI> namespaces = new TreeSet<URI>();

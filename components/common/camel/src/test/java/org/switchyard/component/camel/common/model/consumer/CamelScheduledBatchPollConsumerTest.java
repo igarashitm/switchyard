@@ -13,7 +13,7 @@
  */
 package org.switchyard.component.camel.common.model.consumer;
 
-import static junit.framework.Assert.assertEquals;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 import org.switchyard.component.camel.common.model.v1.V1CamelScheduledBatchPollConsumer;

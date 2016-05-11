@@ -81,6 +81,20 @@
             <groupId>org.switchyard.quickstarts</groupId>
             <artifactId>switchyard-camel-cxf-binding</artifactId>
             <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.apache.cxf</groupId>
+                    <artifactId>cxf-api</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.apache.cxf</groupId>
+                    <artifactId>cxf-rt-frontend-jaxrs</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.apache.cxf</groupId>
+                    <artifactId>cxf-rt-rs-security-oauth</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.switchyard.quickstarts</groupId>
@@ -106,6 +120,12 @@
             <groupId>org.apache.activemq</groupId>
             <artifactId>activemq-broker</artifactId>
             <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.apache.activemq</groupId>
+                    <artifactId>activemq-openwire-legacy</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.apache.activemq</groupId>
@@ -196,19 +216,21 @@
             </plugin>
             <plugin>
                 <groupId>org.apache.karaf.tooling</groupId>
-                <artifactId>features-maven-plugin</artifactId>
-                <version>2.4.0</version>
+                <artifactId>karaf-maven-plugin</artifactId>
+                <version>${version.org.apache.karaf}</version>
                 <executions>
                     <execution>
-                        <id>add-features-to-repo</id>
+                        <id>features-add-to-repository</id>
                         <phase>generate-resources</phase>
                         <goals>
-                            <goal>add-features-to-repo</goal>
+                            <goal>features-add-to-repository</goal>
                         </goals>
                         <configuration>
                             <karafVersion>${version.org.apache.karaf}</karafVersion>
                             <descriptors>
-                                <descriptor>mvn:org.apache.karaf.assemblies.features/spring/${version.org.apache.karaf}/xml/features</descriptor>
+                                <descriptor>mvn:org.apache.karaf.features/standard/${version.org.apache.karaf}/xml/features</descriptor>
+                                <descriptor>mvn:org.apache.karaf.features/spring/${version.org.apache.karaf}/xml/features</descriptor>
+                                <descriptor>mvn:org.apache.karaf.features/enterprise/${version.org.apache.karaf}/xml/features</descriptor>
                                 <descriptor>mvn:org.switchyard.karaf/switchyard/${project.version}/xml/features</descriptor>
                             </descriptors>
                             <features>

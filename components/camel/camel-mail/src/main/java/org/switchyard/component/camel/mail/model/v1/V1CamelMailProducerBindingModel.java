@@ -60,8 +60,8 @@ public class V1CamelMailProducerBindingModel extends V1BaseCamelModel
         CamelVersion cv = new CamelVersion();
         camelVersion = (camelVersion == null) ? "2.17" : camelVersion;
         if (cv.compare("2.17", camelVersion) >= 0) {
-        	CC = "cc";
-        	BCC = "bcc";
+            CC = "cc";
+            BCC = "bcc";
         }
     }
 

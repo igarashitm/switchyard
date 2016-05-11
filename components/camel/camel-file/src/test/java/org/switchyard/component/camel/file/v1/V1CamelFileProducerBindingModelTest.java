@@ -13,7 +13,7 @@
  */
 package org.switchyard.component.camel.file.v1;
 
-import static junit.framework.Assert.assertEquals;
+import static org.junit.Assert.assertEquals;
 
 import org.apache.camel.component.file.FileEndpoint;
 import org.switchyard.component.camel.common.model.file.GenericFileProducerBindingModel;

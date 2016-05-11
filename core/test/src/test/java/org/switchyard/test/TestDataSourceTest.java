@@ -15,8 +15,7 @@ package org.switchyard.test;
 
 import java.io.OutputStream;
 
-import junit.framework.Assert;
-
+import org.junit.Assert;
 import org.junit.Test;
 import org.switchyard.common.io.pull.StringPuller;
 

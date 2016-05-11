@@ -13,7 +13,7 @@
  */
 package org.switchyard.component.camel.jpa.model.v1;
 
-import static junit.framework.Assert.assertEquals;
+import static org.junit.Assert.assertEquals;
 
 import org.apache.camel.component.jpa.JpaEndpoint;
 import org.switchyard.component.camel.config.test.v1.V1BaseCamelServiceBindingModelTest;

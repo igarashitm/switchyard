@@ -13,13 +13,14 @@
  */
 package org.switchyard.deploy.karaf;
 
-import org.apache.felix.gogo.commands.Command;
+import org.apache.karaf.shell.api.action.Command;
 import org.switchyard.admin.SwitchYard;
 
 /**
  * Shell command for get-version.
  */
 @Command(scope = "switchyard", name = "get-version", description = "Returns the version installed on the system.")
+@org.apache.karaf.shell.api.action.lifecycle.Service
 public class GetVersionCommand extends AbstractSwitchYardServiceCommand {
 
     @Override

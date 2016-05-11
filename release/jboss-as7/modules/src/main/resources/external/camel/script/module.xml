@@ -31,7 +31,7 @@
                 <include path="META-INF/services" />
             </exports>
         </module>
-        <module name="org.beanshell" export="true">
+        <module name="org.apache-extras.beanshell" export="true">
             <imports>
                 <include path="META-INF/services" />
             </imports>

@@ -72,9 +72,14 @@ public class CamelContextConfiguratorTest {
         Assert.assertEquals(ManagementStatisticsLevel.Off, 
                 context.getManagementStrategy().getStatisticsLevel());
 
-        domain.setProperty(CamelContextConfigurator.PERFORMANCE_STATISTICS, "All");
+        domain.setProperty(CamelContextConfigurator.PERFORMANCE_STATISTICS, "Extended");
         CamelContextConfigurator.configure(context, domain);
-        Assert.assertEquals(ManagementStatisticsLevel.All, 
+        Assert.assertEquals(ManagementStatisticsLevel.Extended, 
+                context.getManagementStrategy().getStatisticsLevel());
+
+        domain.setProperty(CamelContextConfigurator.PERFORMANCE_STATISTICS, "Default");
+        CamelContextConfigurator.configure(context, domain);
+        Assert.assertEquals(ManagementStatisticsLevel.Default, 
                 context.getManagementStrategy().getStatisticsLevel());
     }
 
@@ -97,7 +102,7 @@ public class CamelContextConfiguratorTest {
         Assert.assertNull(context.getProperty("abc"));
         Assert.assertNotEquals("foobar-camel-context", context.getName());
         Assert.assertEquals(false, context.isUseMDCLogging());
-        Assert.assertEquals(ManagementStatisticsLevel.All
+        Assert.assertEquals(ManagementStatisticsLevel.Default
                 , context.getManagementStrategy().getStatisticsLevel());
         Assert.assertEquals(true, context.isAllowUseOriginalMessage());
         Assert.assertEquals(false, context.isStreamCaching());

@@ -20,8 +20,7 @@ import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.stream.StreamSource;
 
-import junit.framework.Assert;
-
+import org.junit.Assert;
 import org.junit.Test;
 import org.switchyard.transform.xslt.internal.TransformerPool;
 import org.switchyard.transform.xslt.internal.XsltUriResolver;

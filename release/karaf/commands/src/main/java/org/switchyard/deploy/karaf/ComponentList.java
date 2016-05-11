@@ -22,8 +22,10 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
-import org.apache.felix.gogo.commands.Command;
-import org.apache.karaf.shell.console.OsgiCommandSupport;
+import org.apache.karaf.shell.api.action.Command;
+import org.apache.karaf.shell.api.action.lifecycle.Reference;
+import org.apache.karaf.shell.api.action.Action;
+import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceReference;
 import org.switchyard.deploy.Component;
 
@@ -31,14 +33,18 @@ import org.switchyard.deploy.Component;
  * Shell commands for components.
  */
 @Command(scope = "switchyard", name = "component-list", description = "List switchyard components.")
-public class ComponentList extends OsgiCommandSupport {
+@org.apache.karaf.shell.api.action.lifecycle.Service
+public class ComponentList implements Action {
 
     public static final String SWITCHYARD_TYPES = "switchyard.types";
 
+    @Reference
+    private BundleContext _bundleContext;
+    
     @Override
-    protected Object doExecute() throws Exception {
+    public Object execute() throws Exception {
         Collection<ServiceReference<Component>> refs =
-                getBundleContext().getServiceReferences(
+                _bundleContext.getServiceReferences(
                         Component.class, "(" + SWITCHYARD_TYPES + "=*)");
         if (refs != null) {
             Set<String> types = new TreeSet<String>();

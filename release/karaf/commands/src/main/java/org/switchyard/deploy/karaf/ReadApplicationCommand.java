@@ -17,9 +17,10 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.apache.felix.gogo.commands.Argument;
-import org.apache.felix.gogo.commands.Command;
-import org.apache.felix.gogo.commands.Option;
+import org.apache.karaf.shell.api.action.Argument;
+import org.apache.karaf.shell.api.action.Command;
+import org.apache.karaf.shell.api.action.Completion;
+import org.apache.karaf.shell.api.action.Option;
 import org.switchyard.admin.Application;
 import org.switchyard.admin.SwitchYard;
 
@@ -27,9 +28,11 @@ import org.switchyard.admin.SwitchYard;
  * Shell command for read-application.
  */
 @Command(scope = "switchyard", name = "read-application", description = "Returns a details about a SwitchYard application deployed on the system.")
+@org.apache.karaf.shell.api.action.lifecycle.Service
 public class ReadApplicationCommand extends AbstractSwitchYardServiceCommand {
 
     @Argument(index = 0, name = "name", description = "If specified, only details for the named application are returned.", multiValued = true)
+    @Completion(ApplicationNameCompleter.class)
     private List<String> _applicationNames;
 
     @Option(name = "--regex", description = "If specified, treat the application name(s) as a regular expression.")

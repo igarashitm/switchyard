@@ -68,7 +68,7 @@
         </dependency>
         <dependency>
             <groupId>org.apache.karaf.shell</groupId>
-            <artifactId>org.apache.karaf.shell.console</artifactId>
+            <artifactId>org.apache.karaf.shell.core</artifactId>
             <exclusions>
                 <exclusion>
                     <groupId>org.eclipse.osgi</groupId>
@@ -85,4 +85,17 @@
             <artifactId>org.osgi.core</artifactId>
         </dependency>
     </dependencies>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-bundle-plugin</artifactId>
+                <configuration>
+                    <instructions>
+                        <Karaf-Commands>*</Karaf-Commands>
+                    </instructions>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>

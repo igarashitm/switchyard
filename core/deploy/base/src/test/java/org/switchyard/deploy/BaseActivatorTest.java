@@ -15,8 +15,7 @@
 
 package org.switchyard.deploy;
 
-import junit.framework.Assert;
-
+import org.junit.Assert;
 import org.junit.Test;
 
 public class BaseActivatorTest {

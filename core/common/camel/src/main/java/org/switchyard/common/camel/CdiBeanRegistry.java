@@ -19,10 +19,10 @@ public class CdiBeanRegistry implements Registry {
 
     private final static AnnotationLiteral<Any> ANY = new AnnotationLiteral<Any>() {};
 
-    private final BeanManager manager;
+    private final BeanManager _manager;
 
     CdiBeanRegistry(BeanManager manager) {
-        this.manager = manager;
+        this._manager = manager;
     }
 
     @Override
@@ -30,25 +30,25 @@ public class CdiBeanRegistry implements Registry {
         ObjectHelper.notEmpty(name, "name");
         // Work-around for WELD-2089
         if ("properties".equals(name) && findByTypeWithName(PropertiesComponent.class).containsKey("properties")) {
-            return CdiManagerHelper.getReferenceByName(manager, name, PropertiesComponent.class);
+            return CdiManagerHelper.getReferenceByName(_manager, name, PropertiesComponent.class);
         }
-        return CdiManagerHelper.getReferenceByName(manager, name, Object.class);
+        return CdiManagerHelper.getReferenceByName(_manager, name, Object.class);
     }
 
     @Override
     public <T> T lookupByNameAndType(String name, Class<T> type) {
         ObjectHelper.notEmpty(name, "name");
         ObjectHelper.notNull(type, "type");
-        return CdiManagerHelper.getReferenceByName(manager, name, type);
+        return CdiManagerHelper.getReferenceByName(_manager, name, type);
     }
 
     @Override
     public <T> Map<String, T> findByTypeWithName(Class<T> type) {
         ObjectHelper.notNull(type, "type");
         Map<String, T> references = new HashMap<String, T>();
-        for (Bean<?> bean : manager.getBeans(type, ANY)) {
+        for (Bean<?> bean : _manager.getBeans(type, ANY)) {
             if (bean.getName() != null) {
-                references.put(bean.getName(), CdiManagerHelper.getReference(manager, type, bean));
+                references.put(bean.getName(), CdiManagerHelper.getReference(_manager, type, bean));
             }
         }
         return references;
@@ -57,7 +57,7 @@ public class CdiBeanRegistry implements Registry {
     @Override
     public <T> Set<T> findByType(Class<T> type) {
         ObjectHelper.notNull(type, "type");
-        return CdiManagerHelper.getReferencesByType(manager, type, ANY);
+        return CdiManagerHelper.getReferencesByType(_manager, type, ANY);
     }
 
     @Override

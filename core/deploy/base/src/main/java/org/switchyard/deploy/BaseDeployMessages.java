@@ -78,8 +78,8 @@ public interface BaseDeployMessages {
      * invalidHandlerState method definition.
      * @return SwitchYardException
      */
-    @Message(id = 12207 , value = "Invalid handler state.")
-    SwitchYardException invalidHandlerState();
+    @Message(id = 12207 , value = "Invalid handler state '%s'.")
+    SwitchYardException invalidHandlerState(String state);
     
     /**
      * stateCannotBeNull method definition.

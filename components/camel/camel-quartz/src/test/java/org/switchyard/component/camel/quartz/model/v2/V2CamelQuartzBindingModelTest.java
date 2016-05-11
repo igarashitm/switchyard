@@ -13,7 +13,7 @@
  */
 package org.switchyard.component.camel.quartz.model.v2;
 
-import static junit.framework.Assert.assertEquals;
+import static org.junit.Assert.assertEquals;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;

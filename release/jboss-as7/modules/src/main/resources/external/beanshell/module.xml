@@ -12,10 +12,10 @@
  - See the License for the specific language governing permissions and
  - limitations under the License.
  -->
-<module xmlns="urn:jboss:module:1.0" name="org.beanshell">
+<module xmlns="urn:jboss:module:1.0" name="org.apache-extras.beanshell">
 
     <resources>
-        <resource-root path="bsh-${version.org.beanshell}.jar"/>
+        <resource-root path="bsh-${version.org.apache-extras.beanshell}.jar"/>
     </resources>
 
     <dependencies>

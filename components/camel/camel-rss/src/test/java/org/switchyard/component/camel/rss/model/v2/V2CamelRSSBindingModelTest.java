@@ -13,7 +13,7 @@
  */
 package org.switchyard.component.camel.rss.model.v2;
 
-import static junit.framework.Assert.assertEquals;
+import static org.junit.Assert.assertEquals;
 
 import java.net.URI;
 import java.text.ParseException;

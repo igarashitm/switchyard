@@ -16,9 +16,11 @@ package org.switchyard.common.camel;
 import java.util.Iterator;
 import java.util.List;
 
+import org.apache.camel.LoggingLevel;
 import org.apache.camel.RoutesBuilder;
 import org.apache.camel.ShutdownRoute;
 import org.apache.camel.ShutdownRunningTask;
+import org.apache.camel.TypeConverterExists;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.core.xml.AbstractCamelContextFactoryBean;
 import org.apache.camel.core.xml.CamelJMXAgentDefinition;
@@ -352,6 +354,15 @@ public class CamelContextFactoryBeanDelegate extends AbstractCamelContextFactory
         return iterator.hasNext() ? iterator.next() : null;
     }
     
+    @Override
+    public TypeConverterExists getTypeConverterExists() {
+        return _factoryBean.getTypeConverterExists();
+    }
+    
+    @Override
+    public LoggingLevel getTypeConverterExistsLoggingLevel() {
+        return _factoryBean.getTypeConverterExistsLoggingLevel();
+    }
     
     /*
     * Unsupported operations - just ignore the call.
@@ -361,7 +372,7 @@ public class CamelContextFactoryBeanDelegate extends AbstractCamelContextFactory
     protected void findRouteBuildersByPackageScan(String[] packages, PackageScanFilter filter, List<RoutesBuilder> builders) throws Exception {
     }
     @Override
-    protected void findRouteBuildersByContextScan(PackageScanFilter filter, List<RoutesBuilder> builders) throws Exception {
+    protected void findRouteBuildersByContextScan(PackageScanFilter filter, boolean includeNonSingletons, List<RoutesBuilder> builders) throws Exception {
     }
     @Override
     protected void initCustomRegistry(SwitchYardCamelContext context) {
@@ -372,5 +383,4 @@ public class CamelContextFactoryBeanDelegate extends AbstractCamelContextFactory
     @Override
     protected void postProcessBeforeInit(RouteBuilder builder) {
     }
-
 }

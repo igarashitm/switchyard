@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<features name="switchyard-karaf-${project.version}">
+<features xmlns="http://karaf.apache.org/xmlns/features/v1.3.0" name="switchyard-karaf-${project.version}">
 
     <repository>mvn:org.switchyard.karaf/switchyard/${project.version}/xml/core-features</repository>
     <repository>mvn:org.apache.camel.karaf/apache-camel/${version.org.apache.camel}/xml/features</repository>

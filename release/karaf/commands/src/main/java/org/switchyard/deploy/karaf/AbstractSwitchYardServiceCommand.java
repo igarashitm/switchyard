@@ -17,7 +17,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.regex.Pattern;
 
-import org.apache.karaf.shell.console.OsgiCommandSupport;
+import org.apache.karaf.shell.api.action.Action;
+import org.apache.karaf.shell.api.action.lifecycle.Reference;
+import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceReference;
 import org.switchyard.admin.SwitchYard;
 
@@ -25,24 +27,27 @@ import org.switchyard.admin.SwitchYard;
  * Provides utility methods used by commands referencing the SwitchYard admin
  * service.
  */
-public abstract class AbstractSwitchYardServiceCommand extends OsgiCommandSupport {
+public abstract class AbstractSwitchYardServiceCommand implements Action {
 
+    @Reference
+    private BundleContext _bundleContext;
+    
     @Override
-    protected final Object doExecute() throws Exception {
-        final ServiceReference<SwitchYard> serviceReference = getBundleContext().getServiceReference(SwitchYard.class);
+    public final Object execute() throws Exception {
+        final ServiceReference<SwitchYard> serviceReference = _bundleContext.getServiceReference(SwitchYard.class);
         if (serviceReference == null) {
             System.out.println("SwitchYard admin service is unavailable.");
             return null;
         }
         try {
-            final SwitchYard switchYard = getBundleContext().getService(serviceReference);
+            final SwitchYard switchYard = _bundleContext.getService(serviceReference);
             if (switchYard == null) {
                 System.out.println("SwitchYard admin service is unavailable.");
                 return null;
             }
             return doExecute(switchYard);
         } finally {
-            getBundleContext().ungetService(serviceReference);
+            _bundleContext.ungetService(serviceReference);
         }
     }
 

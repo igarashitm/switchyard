@@ -32,7 +32,7 @@
             org.switchyard.*;${switchyard.osgi.import.switchyard.version},
             org.switchyard.config.model;${switchyard.osgi.import.switchyard.version},
             !org.apache.cxf.ws.addressing.impl,
-            org.apache.cxf.*;version="[2.7,3.1)",
+            org.apache.cxf.*;version="[2.7,3.2)",
             *
         </switchyard.osgi.import>
     </properties>
@@ -96,8 +96,8 @@
 	      <scope>test</scope>
 	    </dependency>
         <dependency>
-            <groupId>org.jboss.spec.javax.servlet</groupId>
-            <artifactId>jboss-servlet-api_3.0_spec</artifactId>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
         </dependency>
         <dependency>
             <groupId>javax.mail</groupId>

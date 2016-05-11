@@ -16,11 +16,10 @@ package org.switchyard.deploy.karaf;
 import java.util.Arrays;
 import java.util.List;
 
-import org.apache.felix.service.command.CommandSession;
-import org.apache.karaf.shell.console.Completer;
-import org.apache.karaf.shell.console.completer.ArgumentCompleter;
-import org.apache.karaf.shell.console.completer.StringsCompleter;
-import org.apache.karaf.shell.console.jline.CommandSessionHolder;
+import org.apache.karaf.shell.api.console.CommandLine;
+import org.apache.karaf.shell.api.console.Completer;
+import org.apache.karaf.shell.api.console.Session;
+import org.apache.karaf.shell.support.completers.StringsCompleter;
 import org.switchyard.admin.Application;
 import org.switchyard.admin.ComponentService;
 import org.switchyard.admin.Reference;
@@ -30,14 +29,15 @@ import org.switchyard.admin.SwitchYard;
 /**
  * Generates completion set for Application arguments.
  */
+@org.apache.karaf.shell.api.action.lifecycle.Service
 public class ShowMetricsPatternCompleter implements Completer {
 
     private SwitchYard _switchYard;
 
     @Override
-    public int complete(String buffer, int cursor, List<String> candidates) {
+    public int complete(Session session, CommandLine commandLine, List<String> candidates) {
         final StringsCompleter delegate = new StringsCompleter();
-        final ShowMetricsCommand.SearchType type = getType();
+        final ShowMetricsCommand.SearchType type = getType(session, commandLine);
         switch (type) {
         case service:
             for (Service service : _switchYard.getServices()) {
@@ -59,7 +59,7 @@ public class ShowMetricsPatternCompleter implements Completer {
         default:
             break;
         }
-        return delegate.complete(buffer, cursor, candidates);
+        return delegate.complete(session, commandLine, candidates);
     }
 
     /**
@@ -69,17 +69,14 @@ public class ShowMetricsPatternCompleter implements Completer {
         _switchYard = switchYard;
     }
 
-    private ShowMetricsCommand.SearchType getType() {
-        final CommandSession session = CommandSessionHolder.getSession();
+    private ShowMetricsCommand.SearchType getType(Session session, CommandLine commandLine) {
         if (session == null) {
             return null;
         }
-        final ArgumentCompleter.ArgumentList argList = (ArgumentCompleter.ArgumentList) session
-                .get(ArgumentCompleter.ARGUMENTS_LIST);
-        if (argList == null || argList.getArguments() == null || argList.getArguments().length == 0) {
+        if (commandLine == null || commandLine.getArguments() == null || commandLine.getArguments().length == 0) {
             return null;
         }
-        final List<String> arguments = Arrays.asList(argList.getArguments());
+        final List<String> arguments = Arrays.asList(commandLine.getArguments());
         int argumentOffset = 1; // command is first argument
         for (int index = 0, count = arguments.size(); index < count; ++index) {
             if (arguments.get(index).startsWith("-")) {

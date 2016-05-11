@@ -17,8 +17,9 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.apache.felix.gogo.commands.Command;
-import org.apache.felix.gogo.commands.Option;
+import org.apache.karaf.shell.api.action.Command;
+import org.apache.karaf.shell.api.action.Completion;
+import org.apache.karaf.shell.api.action.Option;
 import org.switchyard.admin.Application;
 import org.switchyard.admin.Reference;
 import org.switchyard.admin.SwitchYard;
@@ -27,11 +28,14 @@ import org.switchyard.admin.SwitchYard;
  * Shell command for read-references.
  */
 @Command(scope = "switchyard", name = "read-reference", description = "Returns a details about a SwitchYard reference deployed on the system.")
+@org.apache.karaf.shell.api.action.lifecycle.Service
 public class ReadReferenceCommand extends AbstractSwitchYardServiceCommand {
 
     @Option(name = "--application", aliases = "-a", description = "If specified, only details for the named application are returned.", multiValued = true)
+    @Completion(ApplicationNameCompleter.class)
     private List<String> _applicationNames;
     @Option(name = "--reference", aliases = "-r", description = "If specified, only details for the named reference are returned.", multiValued = true)
+    @Completion(ReferenceNameCompleter.class)
     private List<String> _referenceNames;
     @Option(name = "--regex", description = "If specified, treat the name(s) as a regular expression.")
     private boolean _regex;

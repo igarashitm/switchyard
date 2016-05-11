@@ -15,13 +15,12 @@ package org.switchyard.remote.infinispan;
 
 import javax.xml.namespace.QName;
 
-import junit.framework.Assert;
-
 import org.infinispan.Cache;
 import org.infinispan.configuration.cache.ConfigurationBuilder;
 import org.infinispan.configuration.global.GlobalConfigurationBuilder;
 import org.infinispan.manager.DefaultCacheManager;
 import org.infinispan.remoting.transport.Address;
+import org.junit.Assert;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

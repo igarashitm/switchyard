@@ -25,8 +25,7 @@ import java.util.Set;
 import javax.crypto.SealedObject;
 import javax.security.auth.Subject;
 
-import junit.framework.Assert;
-
+import org.junit.Assert;
 import org.junit.Test;
 import org.switchyard.common.io.pull.ElementPuller;
 import org.switchyard.security.credential.AssertionCredential;

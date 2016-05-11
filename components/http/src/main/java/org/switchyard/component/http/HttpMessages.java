@@ -2,8 +2,8 @@ package org.switchyard.component.http;
 
 import java.util.Set;
 
-import org.jboss.logging.Cause;
 import org.jboss.logging.Messages;
+import org.jboss.logging.annotations.Cause;
 import org.jboss.logging.annotations.Message;
 import org.jboss.logging.annotations.MessageBundle;
 import org.switchyard.SwitchYardException;

@@ -13,8 +13,10 @@
  */
 package org.switchyard.deploy.karaf;
 
-import org.apache.felix.gogo.commands.Command;
-import org.apache.karaf.shell.console.OsgiCommandSupport;
+import org.apache.karaf.shell.api.action.Action;
+import org.apache.karaf.shell.api.action.Command;
+import org.apache.karaf.shell.api.action.lifecycle.Reference;
+import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceRegistration;
 import org.switchyard.deploy.osgi.SwitchYardEvent;
 import org.switchyard.deploy.osgi.SwitchYardListener;
@@ -29,7 +31,8 @@ import java.util.concurrent.CopyOnWriteArrayList;
  * Shell commands for deployments.
  */
 @Command(scope = "switchyard", name = "deployment-list", description = "List switchyard deployments.")
-public class DeploymentList extends OsgiCommandSupport {
+@org.apache.karaf.shell.api.action.lifecycle.Service
+public class DeploymentList implements Action {
 
 
     private static final String ID_COLUMN_LABEL = "Id";
@@ -45,15 +48,18 @@ public class DeploymentList extends OsgiCommandSupport {
 
     private final List<SwitchYardEvent> _events = new CopyOnWriteArrayList<SwitchYardEvent>();
 
+    @Reference
+    private BundleContext _bundleContext;
+    
     @Override
-    protected Object doExecute() throws Exception {
+    public Object execute() throws Exception {
         SwitchYardListener listener = new SwitchYardListener() {
             @Override
             public void switchyardEvent(SwitchYardEvent event) {
                 _events.add(event);
             }
         };
-        ServiceRegistration<SwitchYardListener> reg = getBundleContext().registerService(SwitchYardListener.class, listener, null);
+        ServiceRegistration<SwitchYardListener> reg = _bundleContext.registerService(SwitchYardListener.class, listener, null);
         reg.unregister();
 
         if (!_events.isEmpty()) {

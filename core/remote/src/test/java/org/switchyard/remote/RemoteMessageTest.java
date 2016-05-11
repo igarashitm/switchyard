@@ -15,8 +15,7 @@ package org.switchyard.remote;
 
 import java.io.StringReader;
 
-import junit.framework.Assert;
-
+import org.junit.Assert;
 import org.junit.Test;
 import org.switchyard.HandlerException;
 import org.switchyard.SwitchYardException;

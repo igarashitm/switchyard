@@ -20,11 +20,10 @@ import java.util.List;
 import java.util.Set;
 import java.util.regex.Pattern;
 
-import org.apache.felix.service.command.CommandSession;
-import org.apache.karaf.shell.console.Completer;
-import org.apache.karaf.shell.console.completer.ArgumentCompleter;
-import org.apache.karaf.shell.console.completer.StringsCompleter;
-import org.apache.karaf.shell.console.jline.CommandSessionHolder;
+import org.apache.karaf.shell.api.console.CommandLine;
+import org.apache.karaf.shell.api.console.Completer;
+import org.apache.karaf.shell.api.console.Session;
+import org.apache.karaf.shell.support.completers.StringsCompleter;
 import org.switchyard.admin.Application;
 import org.switchyard.admin.Service;
 import org.switchyard.admin.SwitchYard;
@@ -32,6 +31,7 @@ import org.switchyard.admin.SwitchYard;
 /**
  * Generates completion set for Application arguments.
  */
+@org.apache.karaf.shell.api.action.lifecycle.Service
 public class ServiceNameCompleter implements Completer {
 
     private SwitchYard _switchYard;
@@ -40,9 +40,9 @@ public class ServiceNameCompleter implements Completer {
     private Set<String> _optionsWithParameters = Collections.emptySet();
 
     @Override
-    public int complete(String buffer, int cursor, List<String> candidates) {
+    public int complete(Session session, CommandLine commandLine, List<String> candidates) {
         final StringsCompleter delegate = new StringsCompleter();
-        final Pattern applicationNamePattern = getApplicationNamePattern();
+        final Pattern applicationNamePattern = getApplicationNamePattern(session, commandLine);
         final List<Application> applications = _switchYard.getApplications();
         for (Application application : applications) {
             if (applicationNamePattern.matcher(application.getName().toString()).find()) {
@@ -51,7 +51,7 @@ public class ServiceNameCompleter implements Completer {
                 }
             }
         }
-        return delegate.complete(buffer, cursor, candidates);
+        return delegate.complete(session, commandLine, candidates);
     }
 
     /**
@@ -86,17 +86,14 @@ public class ServiceNameCompleter implements Completer {
         }
     }
 
-    private Pattern getApplicationNamePattern() {
-        final CommandSession session = CommandSessionHolder.getSession();
+    private Pattern getApplicationNamePattern(Session session, CommandLine commandLine) {
         if (session == null) {
             return compilePattern(null, false);
         }
-        final ArgumentCompleter.ArgumentList argList = (ArgumentCompleter.ArgumentList) session
-                .get(ArgumentCompleter.ARGUMENTS_LIST);
-        if (argList == null || argList.getArguments() == null || argList.getArguments().length == 0) {
+        if (commandLine == null || commandLine.getArguments() == null || commandLine.getArguments().length == 0) {
             return compilePattern(null, false);
         }
-        final List<String> arguments = Arrays.asList(argList.getArguments());
+        final List<String> arguments = Arrays.asList(commandLine.getArguments());
         boolean isRegex = arguments.indexOf("--regex") > 0;
         if (_applicationArgumentIndex == null) {
             if (_applicationOptions == null || _applicationOptions.length == 0) {

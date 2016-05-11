@@ -16,8 +16,7 @@ package org.switchyard.config.model.switchyard;
 
 import javax.xml.namespace.QName;
 
-import junit.framework.Assert;
-
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.switchyard.config.model.ModelPuller;

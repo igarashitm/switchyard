@@ -21,8 +21,7 @@ import javax.xml.soap.MessageFactory;
 import javax.xml.soap.SOAPConstants;
 import javax.xml.soap.SOAPMessage;
 
-import junit.framework.Assert;
-
+import org.junit.Assert;
 import org.junit.Test;
 import org.switchyard.common.type.Classes;
 import org.switchyard.security.credential.AssertionCredential;

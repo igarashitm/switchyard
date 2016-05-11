@@ -17,9 +17,9 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.apache.felix.gogo.commands.Argument;
-import org.apache.felix.gogo.commands.Command;
-import org.apache.felix.gogo.commands.Option;
+import org.apache.karaf.shell.api.action.Argument;
+import org.apache.karaf.shell.api.action.Command;
+import org.apache.karaf.shell.api.action.Option;
 import org.switchyard.admin.Application;
 import org.switchyard.admin.SwitchYard;
 import org.switchyard.config.model.switchyard.ArtifactModel;
@@ -28,6 +28,7 @@ import org.switchyard.config.model.switchyard.ArtifactModel;
  * Shell command for uses-artifact.
  */
 @Command(scope = "switchyard", name = "uses-artifact", description = "Returns a list of all SwitchYard applications referencing the specified artifact.")
+@org.apache.karaf.shell.api.action.lifecycle.Service
 public class UsesArtifactCommand extends AbstractSwitchYardServiceCommand {
 
     /**

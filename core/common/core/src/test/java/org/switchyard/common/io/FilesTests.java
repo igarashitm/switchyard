@@ -16,8 +16,7 @@ package org.switchyard.common.io;
 import java.io.File;
 import java.io.FileWriter;
 
-import junit.framework.Assert;
-
+import org.junit.Assert;
 import org.junit.Test;
 import org.switchyard.common.io.pull.StringPuller;
 

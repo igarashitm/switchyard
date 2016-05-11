@@ -17,14 +17,13 @@ import java.util.List;
 
 import javax.xml.namespace.QName;
 
-import junit.framework.Assert;
-
 import org.apache.camel.Exchange;
 import org.apache.camel.ProducerTemplate;
 import org.apache.camel.TypeConversionException;
 import org.apache.camel.component.mock.MockEndpoint;
 import org.apache.camel.support.TypeConverterSupport;
 import org.jboss.netty.buffer.BigEndianHeapChannelBuffer;
+import org.junit.Assert;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

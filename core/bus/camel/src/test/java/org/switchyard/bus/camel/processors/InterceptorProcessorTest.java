@@ -1,9 +1,8 @@
 package org.switchyard.bus.camel.processors;
 
-import junit.framework.Assert;
-
 import org.apache.camel.Exchange;
 import org.apache.camel.impl.DefaultExchange;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.switchyard.ExchangeInterceptor;

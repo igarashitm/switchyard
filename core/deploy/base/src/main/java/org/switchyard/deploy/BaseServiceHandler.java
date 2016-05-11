@@ -47,7 +47,7 @@ public class BaseServiceHandler extends BaseHandler implements ServiceHandler {
             return;
         } else if ((_state == State.STARTING) || (_state == State.STARTED)
             || (_state == State.STOPPING)) {
-            throw BaseDeployMessages.MESSAGES.invalidHandlerState();
+            throw BaseDeployMessages.MESSAGES.invalidHandlerState(_state.name());
         }
         final ClassLoader oldTCCL = Thread.currentThread().getContextClassLoader();
         try {
@@ -77,7 +77,7 @@ public class BaseServiceHandler extends BaseHandler implements ServiceHandler {
             // already stopped
             return;
         } else if (_state != State.STARTED) {
-            throw BaseDeployMessages.MESSAGES.invalidHandlerState();
+            throw BaseDeployMessages.MESSAGES.invalidHandlerState(_state.name());
         }
         final ClassLoader oldTCCL = Thread.currentThread().getContextClassLoader();
         try {

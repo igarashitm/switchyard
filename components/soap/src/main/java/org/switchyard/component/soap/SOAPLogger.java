@@ -1,9 +1,9 @@
 package org.switchyard.component.soap;
 
 import javax.xml.soap.SOAPException;
-import org.jboss.logging.Cause;
 import org.jboss.logging.Logger;
 import org.jboss.logging.Logger.Level;
+import org.jboss.logging.annotations.Cause;
 import org.jboss.logging.annotations.LogMessage;
 import org.jboss.logging.annotations.Message;
 import org.jboss.logging.annotations.MessageLogger;

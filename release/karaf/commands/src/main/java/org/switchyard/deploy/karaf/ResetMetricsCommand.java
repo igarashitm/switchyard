@@ -16,9 +16,11 @@ package org.switchyard.deploy.karaf;
 import java.util.List;
 import java.util.regex.Pattern;
 
-import org.apache.felix.gogo.commands.Argument;
-import org.apache.felix.gogo.commands.Command;
-import org.apache.felix.gogo.commands.Option;
+import org.apache.karaf.shell.api.action.Argument;
+import org.apache.karaf.shell.api.action.Command;
+import org.apache.karaf.shell.api.action.Completion;
+import org.apache.karaf.shell.api.action.Option;
+import org.apache.karaf.shell.support.completers.StringsCompleter;
 import org.switchyard.admin.Application;
 import org.switchyard.admin.ComponentService;
 import org.switchyard.admin.Reference;
@@ -29,6 +31,7 @@ import org.switchyard.admin.SwitchYard;
  * Shell command for uses-artifact.
  */
 @Command(scope = "switchyard", name = "reset-metrics", description = "Reset metrics for the specified service/reference/application service.")
+@org.apache.karaf.shell.api.action.lifecycle.Service
 public class ResetMetricsCommand extends AbstractSwitchYardServiceCommand {
 
     /**
@@ -92,9 +95,11 @@ public class ResetMetricsCommand extends AbstractSwitchYardServiceCommand {
     }
 
     @Argument(index = 0, name = "type", description = "Specifies the type [service | reference | application | all] of metrics to reset.", required = true)
+    @Completion(StringsCompleter.class)
     private SearchType _type;
 
     @Argument(index = 1, name = "patterns", description = "Specifies the search pattern to use.", multiValued = true)
+    @Completion(ResetMetricsPatternCompleter.class)
     private List<String> _patterns;
 
     @Option(name = "--regex", description = "If specified, treat the pattern(s) as a regular expression.")

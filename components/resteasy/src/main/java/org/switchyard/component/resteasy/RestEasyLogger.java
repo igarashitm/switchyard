@@ -1,9 +1,9 @@
 package org.switchyard.component.resteasy;
 
 import java.io.IOException;
-import org.jboss.logging.Cause;
 import org.jboss.logging.Logger;
 import org.jboss.logging.Logger.Level;
+import org.jboss.logging.annotations.Cause;
 import org.jboss.logging.annotations.LogMessage;
 import org.jboss.logging.annotations.Message;
 import org.jboss.logging.annotations.MessageLogger;

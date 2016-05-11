@@ -13,7 +13,7 @@
  */
 package org.switchyard.component.camel.common.model.consumer;
 
-import static junit.framework.Assert.assertEquals;
+import static org.junit.Assert.assertEquals;
 
 import java.util.concurrent.TimeUnit;
 

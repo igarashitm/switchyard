@@ -20,8 +20,7 @@ import java.io.OutputStream;
 
 import javax.activation.DataSource;
 
-import junit.framework.Assert;
-
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.switchyard.Exchange;

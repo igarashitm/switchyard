@@ -13,8 +13,8 @@
  */
 package org.switchyard.test;
 
-import static junit.framework.Assert.assertNotNull;
-import static junit.framework.Assert.assertTrue;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import org.apache.camel.impl.DefaultCamelContext;
 import org.junit.Test;

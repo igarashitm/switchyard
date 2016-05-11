@@ -13,8 +13,8 @@
  */
 package org.switchyard.component.camel.config.test.v1;
 
-import static junit.framework.Assert.assertTrue;
 import static org.apache.camel.util.URISupport.normalizeUri;
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 

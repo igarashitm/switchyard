@@ -16,7 +16,9 @@
     <route id="CamelTestRoute">
         <from uri="switchyard://OrderService"/>
         <log message="ItemId [${body}]"/>
-        <enrich uri="switchyard://EnrichService?operationName=doNothing"/>
+        <enrich>
+            <constant>switchyard://EnrichService?operationName=doNothing</constant>
+        </enrich>
         <to uri="switchyard://WarehouseService?operationName=hasItem"/>
         <log message="Title Name [${body}]"/>
         <log message="Properties [{{user.name}}, {{prop.domain}}, {{prop.composite}}, {{prop.component}}]"/>
